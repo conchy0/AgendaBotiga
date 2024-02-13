@@ -23,7 +23,7 @@ namespace MenuBotiga
             diners = Convert.ToDecimal(Console.ReadLine());
             Menu();
         }
-
+        //Menú
         static void Menu()
         {
             Console.BackgroundColor = ConsoleColor.White;
