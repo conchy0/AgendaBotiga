@@ -1,173 +1,196 @@
 ﻿using System;
 
-namespace MenuBotiga
+class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static string[] productesBotiga = { "Entrecot a la brasa", "Fideuà", "Sushi", "Rissoto de gamba", "Pollastre amb salses", "Macarrons amb Tomaquina", "Llanties amb Xorís", "Pastís de formatge" };
-        static double[] preus = { 15.99, 12.50, 10.75, 9.25, 8.99, 7.75, 6.50, 5.99 };
-        static int nElemBotiga = productesBotiga.Length;
-        static string[] productesCistella = new string[10];
-        static int[] quantitat = new int[10];
-        static int nElemCistella = 0;
-        static decimal diners;
+        decimal diners = 0;
+        string[] productesBotiga = {
+            "Entrecot a la brasa",
+            "Fideuà",
+            "Sushi",
+            "Rissoto de gamba",
+            "Pollastre amb salses",
+            "Macarrons amb Tomaquina",
+            "Llanties amb Xorís",
+            "Pastís de formatge"
+        };
+        decimal[] preus = {
+            15.99m,
+            12.50m,
+            10.75m,
+            9.25m,
+            8.99m,
+            7.75m,
+            6.50m,
+            5.99m
+        };
+        Menu(ref diners, productesBotiga, preus);
+    }
 
-        static void Main(string[] args)
+    static void Menu(ref decimal diners, string[] productesBotiga, decimal[] preus)
+    {
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+
+        Console.WriteLine("Bones, quin és el teu nom?");
+        string nom = Console.ReadLine();
+        Console.WriteLine($"De quants diners disposes {nom}?");
+        diners = Convert.ToDecimal(Console.ReadLine());
+
+        string[] Menu = {
+            " ╔═════════════════════════════════════════════════════════╗ ",
+            " ║                    Botiga  Ca la Maria                  ║ ",
+            " ║=========================================================║ ",
+            " ║                    1) Mostrar Botiga                    ║ ",
+            " ║                    2) Mostrar Cistella                  ║ ",
+            " ║                    3) Realitzar el Pagament             ║ ",
+            " ║                    4) Afegir Producte                   ║ ",
+            " ║                    5) Ampliar Tenda                     ║ ",
+            " ║                    6) Modificar Preu                    ║ ",
+            " ║                    7) Modificar Producte                ║ ",
+            " ║                    8) Ordenar Productes                 ║ ",
+            " ║                    9) Ordenar Preus                     ║ ",
+            " ║                    10) Comprar Producte                 ║ ",
+            " ║                    11) Sortir                           ║ ",
+            " ║=========================================================║ ",
+            " ║   - Escull una opcio -                                  ║ ",
+            " ║=========================================================║ ",
+            " ║                                             Nil i Alex  ║ ",
+            " ║_________________________________________________________║ "
+        };
+
+        foreach (string line in Menu)
         {
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("Bones, quin és el teu nom?");
-            string nom = Console.ReadLine();
-            Console.WriteLine($"De quants diners disposes {nom}?");
-            diners = Convert.ToDecimal(Console.ReadLine());
-            Menu();
-        }
-        //Menú
-        static void Menu()
-        {
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine(" ╔═════════════════════════════════════════════════════════╗ ");
-            Console.WriteLine(" ║                    Botiga  Ca la Maria                  ║ ");
-            Console.WriteLine(" ║=========================================================║ ");
-            Console.WriteLine(" ║                    1) Mostrar Botiga                    ║ ");
-            Console.WriteLine(" ║                    2) Mostrar Cistella                  ║ ");
-            Console.WriteLine(" ║                    3) Realitzar el Pagament             ║ ");
-            Console.WriteLine(" ║                    4) Afegir Entrecot a la brasa        ║ ");
-            Console.WriteLine(" ║                    5) Afegir Fideuà                     ║ ");
-            Console.WriteLine(" ║                    6) Afegir Sushi                      ║ ");
-            Console.WriteLine(" ║                    7) Afegir Rissoto de gamba           ║ ");
-            Console.WriteLine(" ║                    8) Afegir Pollastre amb salses       ║ ");
-            Console.WriteLine(" ║                    9) Afegir Macarrons amb Tomaquina    ║ ");
-            Console.WriteLine(" ║                    10) Afegir Llanties amb Xorís        ║ ");
-            Console.WriteLine(" ║                    11) Afegir Pastís de formatge        ║ ");
-            Console.WriteLine(" ║                    12) Sortir                           ║ ");
-            Console.WriteLine(" ║=========================================================║ ");
-            Console.WriteLine(" ║   - Escull una opcio -                                  ║ ");
-            Console.WriteLine(" ║=========================================================║ ");
-            Console.WriteLine(" ║                                             Nil i Alex  ║ ");
-            Console.WriteLine(" ║_________________________________________________________║ ");
-
-            int opcio = Convert.ToInt32(Console.ReadLine());
-
-            switch (opcio)
-            {
-                case 1:
-                    MostrarBotiga();
-                    break;
-                case 2:
-                    MostrarCistella();
-                    break;
-                case 3:
-                    RealitzarPagament();
-                    break;
-                case 4:
-                    AfegirProducte("Entrecot a la brasa", 15.99);
-                    break;
-                case 5:
-                    AfegirProducte("Fideuà", 12.50);
-                    break;
-                case 6:
-                    AfegirProducte("Sushi", 10.75);
-                    break;
-                case 7:
-                    AfegirProducte("Rissoto de gamba", 9.25);
-                    break;
-                case 8:
-                    AfegirProducte("Pollastre amb salses", 8.99);
-                    break;
-                case 9:
-                    AfegirProducte("Macarrons amb Tomaquina", 7.75);
-                    break;
-                case 10:
-                    AfegirProducte("Llanties amb Xorís", 6.50);
-                    break;
-                case 11:
-                    AfegirProducte("Pastís de formatge", 5.99);
-                    break;
-                case 12:
-                    Console.WriteLine("Gràcies per la teva visita!");
-                    return;
-                default:
-                    Console.WriteLine("Opció no vàlida. Torna a seleccionar.");
-                    break;
-            }
-            Console.WriteLine("Prem qualsevol tecla per continuar...");
-            Console.ReadKey();
-            Menu();
+            Console.WriteLine(line);
         }
 
-        static void AfegirProducte(string producte, double preu)
+        int opcio = Convert.ToInt32(Console.ReadLine());
+
+        switch (opcio)
         {
-            if (nElemCistella < productesCistella.Length)
+            case 1:
+                MostrarBotiga(productesBotiga, preus);
+                break;
+            case 2:
+                MostrarCistella(productesBotiga, preus);
+                break;
+            case 3:
+                RealitzarPagament(ref diners);
+                break;
+            case 4:
+                AfegirProducte(productesBotiga, preus);
+                break;
+            case 5:
+                AmpliarTenda(ref productesBotiga, ref preus);
+                break;
+            case 6:
+                ModificarPreu(productesBotiga, preus);
+                break;
+            case 7:
+                ModificarProducte(productesBotiga);
+                break;
+            case 8:
+                OrdenarProductes(productesBotiga, preus);
+                break;
+            case 9:
+                OrdenarPreus(productesBotiga, preus);
+                break;
+            case 10:
+                ComprarProducte(productesBotiga, preus, ref diners);
+                break;
+            case 11:
+                Console.WriteLine("Gràcies per la teva visita!");
+                return;
+            default:
+                Console.WriteLine("Opció no vàlida. Torna a seleccionar.");
+                break;
+        }
+        Console.WriteLine("Prem qualsevol tecla per continuar...");
+        Console.ReadKey();
+        Menu(ref diners, productesBotiga, preus);
+    }
+
+    static void MostrarBotiga(string[] productes, decimal[] preus)
+    {
+        Console.WriteLine("\nLlista de Productes Disponibles:\n");
+        for (int i = 0; i < productes.Length; i++)
+        {
+            Console.WriteLine($"{i + 1}. {productes[i]} - {preus[i]:0.00}€");
+        }
+    }
+
+    static void MostrarCistella(string[] productes, decimal[] preus)
+    {
+        Console.WriteLine("\nProductes a la Cistella:\n");
+
+        // Verificar si la cistella está vacía
+        if (productes.Length == 0)
+        {
+            Console.WriteLine("La cistella està buida.");
+        }
+        else
+        {
+            // Mostrar cada producto en la cistella junto con su precio
+            for (int i = 0; i < productes.Length; i++)
             {
-                if (diners >= Convert.ToDecimal(preu))
-                {
-                    productesCistella[nElemCistella] = producte;
-                    quantitat[nElemCistella] = 1;
-                    nElemCistella++;
-                    diners -= Convert.ToDecimal(preu);
-                    Console.WriteLine($"S'ha afegit {producte} a la cistella.");
-                }
-                else
-                {
-                    Console.WriteLine("No tens suficients diners per comprar aquest producte.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("La cistella està plena. No es pot afegir més productes.");
+                Console.WriteLine($"{i + 1}. {productes[i]} - {preus[i]:0.00}€");
             }
         }
+    }
 
-        static void MostrarBotiga()
+
+    static void RealitzarPagament(ref decimal diners)
+    {
+        Console.WriteLine("Introdueix el preu total de la compra:");
+        decimal preuTotal = Convert.ToDecimal(Console.ReadLine());
+
+        // Verificar si hay suficiente dinero para realizar el pago
+        if (diners >= preuTotal)
         {
-            Console.WriteLine("\nLlista de Productes Disponibles:\n");
-            for (int i = 0; i < nElemBotiga; i++)
-            {
-                Console.WriteLine($"{i + 1}. {productesBotiga[i]} - {preus[i]}€");
-            }
+            decimal canvi = diners - preuTotal;
+            Console.WriteLine($"Pagament realitzat amb èxit. El teu canvi és {canvi:0.00}€. Gràcies per la teva compra!");
+            diners = 0; // Reiniciar la cantidad de dinero
         }
-
-        static void MostrarCistella()
+        else
         {
-            if (nElemCistella == 0)
-            {
-                Console.WriteLine("La cistella està buida.");
-            }
-            else
-            {
-                Console.WriteLine("\nEls teus productes a la cistella:\n");
-                for (int i = 0; i < nElemCistella; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {productesCistella[i]} - Quantitat: {quantitat[i]}");
-                }
-            }
+            Console.WriteLine("No tens suficients diners per a realitzar el pagament.");
         }
+    }
 
-        static void RealitzarPagament()
-        {
-            decimal total = 0;
-            for (int i = 0; i < nElemCistella; i++)
-            {
-                int index = Array.IndexOf(productesBotiga, productesCistella[i]);
-                total += (decimal)preus[index] * quantitat[i];
-            }
+    static void AfegirProducte(string[] productesBotiga, decimal[] preus)
+    {
+        // Implementación de AfegirProducte
+    }
 
-            if (diners >= total)
-            {
-                diners -= total;
-                Console.WriteLine($"Pagament realitzat amb èxit. El teu canvi és {diners}€. Gràcies per la teva compra!");
-                nElemCistella = 0;
-                Array.Clear(productesCistella, 0, productesCistella.Length);
-                Array.Clear(quantitat, 0, quantitat.Length);
-            }
-            else
-            {
-                Console.WriteLine($"No tens suficients diners. El total de la compra és {total}€ i només disposes de {diners}€.");
-            }
-        }
+    static void AmpliarTenda(ref string[] productesBotiga, ref decimal[] preus)
+    {
+        // Implementación de AmpliarTenda
+    }
+
+    static void ModificarPreu(string[] productesBotiga, decimal[] preus)
+    {
+        // Implementación de ModificarPreu
+    }
+
+    static void ModificarProducte(string[] productesBotiga)
+    {
+        // Implementación de ModificarProducte
+    }
+
+    static void OrdenarProductes(string[] productesBotiga, decimal[] preus)
+    {
+        // Implementación de OrdenarProductes
+    }
+
+    static void OrdenarPreus(string[] productesBotiga, decimal[] preus)
+    {
+        // Implementación de OrdenarPreus
+    }
+
+    static void ComprarProducte(string[] productesBotiga, decimal[] preus, ref decimal diners)
+    {
+        // Implementación de ComprarProducte
     }
 }
